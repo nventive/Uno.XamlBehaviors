@@ -2,16 +2,21 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 namespace Microsoft.Xaml.Interactivity
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Diagnostics;
+    using global::System;
+    using global::System.Collections.Generic;
+    using global::System.Diagnostics;
     using Windows.Foundation.Collections;
-    using Windows.UI.Xaml;
 
-	/// <summary>
-	/// Represents a collection of IBehaviors with a shared <see cref="Microsoft.Xaml.Interactivity.BehaviorCollection.AssociatedObject"/>.
-	/// </summary>
-	public sealed class BehaviorCollection : DependencyObjectCollection
+#if HAS_WINUI
+    using Microsoft.UI.Xaml;
+#else
+    using Windows.UI.Xaml;
+#endif
+
+    /// <summary>
+    /// Represents a collection of IBehaviors with a shared <see cref="Microsoft.Xaml.Interactivity.BehaviorCollection.AssociatedObject"/>.
+    /// </summary>
+    public sealed class BehaviorCollection : DependencyObjectCollection
     {
         // After a VectorChanged event we need to compare the current state of the collection
         // with the old collection so that we can call Detach on all removed items.

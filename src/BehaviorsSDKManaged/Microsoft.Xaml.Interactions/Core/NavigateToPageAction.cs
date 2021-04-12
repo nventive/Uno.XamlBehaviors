@@ -4,9 +4,18 @@ namespace Microsoft.Xaml.Interactions.Core
 {
     using Microsoft.Xaml.Interactions.Utility;
     using Microsoft.Xaml.Interactivity;
+
+#if HAS_WINUI
+    using Microsoft.UI.Xaml;
+    using Microsoft.UI.Xaml.Data;
+    using Microsoft.UI.Xaml.Controls;
+    using Microsoft.UI.Xaml.Markup;
+#else
     using Windows.UI.Xaml;
+    using Windows.UI.Xaml.Data;
     using Windows.UI.Xaml.Controls;
     using Windows.UI.Xaml.Markup;
+#endif
 
     /// <summary>
     /// An action that switches the current visual to the specified <see cref="Windows.UI.Xaml.Controls.Page"/>.
@@ -18,7 +27,7 @@ namespace Microsoft.Xaml.Interactions.Core
         /// <summary>
         /// Identifies the <seealso cref="TargetPage"/> dependency property.
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
+        [global::System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
         public static readonly DependencyProperty TargetPageProperty = DependencyProperty.Register(
             "TargetPage",
             typeof(string),
@@ -28,7 +37,7 @@ namespace Microsoft.Xaml.Interactions.Core
         /// <summary>
         /// Identifies the <seealso cref="Parameter"/> dependency property.
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
+        [global::System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
         public static readonly DependencyProperty ParameterProperty = DependencyProperty.Register(
             "Parameter",
             typeof(object),

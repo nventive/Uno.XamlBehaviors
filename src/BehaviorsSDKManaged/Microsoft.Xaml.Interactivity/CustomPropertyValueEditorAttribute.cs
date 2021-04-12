@@ -2,7 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 namespace Microsoft.Xaml.Interactivity
 {
-	using System;
+	using global::System;
 
 	/// <summary>
 	/// Enumerates possible values for reusable property value editors.

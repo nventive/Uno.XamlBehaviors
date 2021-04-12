@@ -2,7 +2,11 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 namespace Microsoft.Xaml.Interactivity
 {
+#if HAS_WINUI
+    using Microsoft.UI.Xaml;
+#else
     using Windows.UI.Xaml;
+#endif
 
     /// <summary>
     /// Interface implemented by all custom behaviors.

@@ -2,11 +2,19 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 namespace Microsoft.Xaml.Interactions.Core
 {
-    using System;
-    using System.Globalization;
+    using global::System;
+    using global::System.Globalization;
+    using Interactivity;
+
+#if HAS_WINUI
+    using Microsoft.UI.Xaml;
+    using Microsoft.UI.Xaml.Controls;
+    using Microsoft.UI.Xaml.Markup;
+#else
+    using Windows.UI.Xaml;
     using Windows.UI.Xaml.Controls;
     using Windows.UI.Xaml.Markup;
-    using Interactivity;
+#endif
 
     /// <summary>
     /// A helper class that enables converting values specified in markup (strings) to their object representation.

@@ -2,14 +2,19 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 namespace Microsoft.Xaml.Interactivity
 {
-    using System;
+    using global::System;
     using Windows.Foundation.Collections;
-    using Windows.UI.Xaml;
 
-	/// <summary>
-	/// Represents a collection of IActions.
-	/// </summary>
-	public sealed class ActionCollection : DependencyObjectCollection
+#if HAS_WINUI
+    using Microsoft.UI.Xaml;
+#else
+    using Windows.UI.Xaml;
+#endif
+
+    /// <summary>
+    /// Represents a collection of IActions.
+    /// </summary>
+    public sealed class ActionCollection : DependencyObjectCollection
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ActionCollection"/> class.

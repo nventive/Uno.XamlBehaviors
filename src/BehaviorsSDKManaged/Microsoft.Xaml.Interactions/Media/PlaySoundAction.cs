@@ -2,33 +2,44 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 namespace Microsoft.Xaml.Interactions.Media
 {
-	using System;
-	using System.Globalization;
+	using global::System;
+	using global::System.Globalization;
 	using Interactivity;
-	using Windows.UI.Xaml;
-	using Windows.UI.Xaml.Controls;
 
+#if HAS_WINUI
+    using Microsoft.UI.Xaml;
+	using Microsoft.UI.Xaml.Controls;
 #if HAS_UNO
-	using Popup = Windows.UI.Xaml.Controls.Popup;
+    using Popup = Microsoft.UI.Xaml.Controls.Popup;
+#else
+	using Popup = Microsoft.UI.Xaml.Controls.Primitives.Popup;
+#endif
+#else
+    using Windows.UI.Xaml;
+	using Windows.UI.Xaml.Controls;
+#if HAS_UNO
+    using Popup = Windows.UI.Xaml.Controls.Popup;
 #else
 	using Popup = Windows.UI.Xaml.Controls.Primitives.Popup;
 #endif
+#endif
 
-	/// <summary>
-	/// An action that will play a sound to completion.
-	/// </summary>
-	/// <remarks>
-	/// This action is intended for use with short sound effects that don't need to be stopped or controlled. If you are trying 
-	/// to create a music player or game, it may not meet your needs.
-	/// </remarks>
-	public sealed partial class PlaySoundAction : DependencyObject, IAction
+
+    /// <summary>
+    /// An action that will play a sound to completion.
+    /// </summary>
+    /// <remarks>
+    /// This action is intended for use with short sound effects that don't need to be stopped or controlled. If you are trying 
+    /// to create a music player or game, it may not meet your needs.
+    /// </remarks>
+    public sealed partial class PlaySoundAction : DependencyObject, IAction
 	{
 		private const string MsAppXSchemeFormatString = "ms-appx:///{0}";
 
 		/// <summary>
 		/// Identifies the <seealso cref="Source"/> dependency property.
 		/// </summary>
-		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
+		[global::System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
 		public static readonly DependencyProperty SourceProperty = DependencyProperty.Register(
 			"Source",
 			typeof(string),
@@ -38,7 +49,7 @@ namespace Microsoft.Xaml.Interactions.Media
 		/// <summary>
 		/// Identifies the <seealso cref="Volume"/> dependency property.
 		/// </summary>
-		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
+		[global::System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
 		public static readonly DependencyProperty VolumeProperty = DependencyProperty.Register(
 			"Volume",
 			typeof(double),
@@ -109,7 +120,9 @@ namespace Microsoft.Xaml.Interactions.Media
 			}
 
 			this._popup = new Popup();
-			MediaElement mediaElement = new MediaElement();
+
+#if !HAS_WINUI
+            MediaElement mediaElement = new MediaElement();
 			_popup.Child = mediaElement;
 
 			// It is legal (although not advisable) to provide a video file. By setting visibility to collapsed, only the sound track should play.
@@ -119,6 +132,7 @@ namespace Microsoft.Xaml.Interactions.Media
 
 			mediaElement.MediaEnded += this.MediaElement_MediaEnded;
 			mediaElement.MediaFailed += this.MediaElement_MediaFailed;
+#endif
 
 			this._popup.IsOpen = true;
 			return true;

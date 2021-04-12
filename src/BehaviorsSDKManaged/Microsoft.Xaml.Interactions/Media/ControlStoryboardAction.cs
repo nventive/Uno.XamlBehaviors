@@ -3,18 +3,24 @@
 namespace Microsoft.Xaml.Interactions.Media
 {
 	using Interactivity;
-	using Windows.UI.Xaml;
-	using Windows.UI.Xaml.Media.Animation;
 
-	/// <summary>
-	/// An action that will change the state of the specified <seealso cref="Windows.UI.Xaml.Media.Animation.Storyboard"/> when executed.
-	/// </summary>
-	public sealed partial class ControlStoryboardAction : DependencyObject, IAction
+#if HAS_WINUI
+    using Microsoft.UI.Xaml;
+    using Microsoft.UI.Xaml.Media.Animation;
+#else
+    using Windows.UI.Xaml;
+    using Windows.UI.Xaml.Media.Animation;
+#endif
+
+    /// <summary>
+    /// An action that will change the state of the specified <seealso cref="Windows.UI.Xaml.Media.Animation.Storyboard"/> when executed.
+    /// </summary>
+    public sealed partial class ControlStoryboardAction : DependencyObject, IAction
 	{
 		/// <summary>
 		/// Identifies the <seealso cref="ControlStoryboardOption"/> dependency property.
 		/// </summary>
-		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
+		[global::System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
 		public static readonly DependencyProperty ControlStoryboardOptionProperty = DependencyProperty.Register(
 			"ControlStoryboardOption",
 			typeof(ControlStoryboardOption),
@@ -24,7 +30,7 @@ namespace Microsoft.Xaml.Interactions.Media
 		/// <summary>
 		/// Identifies the <seealso cref="Storyboard"/> dependency property.
 		/// </summary>
-		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
+		[global::System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
 		public static readonly DependencyProperty StoryboardProperty = DependencyProperty.Register(
 			"Storyboard",
 			typeof(Storyboard),

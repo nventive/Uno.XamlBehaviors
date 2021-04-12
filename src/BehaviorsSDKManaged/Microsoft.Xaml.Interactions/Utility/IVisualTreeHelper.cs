@@ -2,7 +2,11 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 namespace Microsoft.Xaml.Interactions.Utility
 {
+#if HAS_WINUI
+    using Microsoft.UI.Xaml;
+#else
     using Windows.UI.Xaml;
+#endif
 
     /// <summary>
     /// Abstraction layer over the UWP's VisualTreeHelper class so we can 

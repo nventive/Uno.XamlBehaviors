@@ -1,0 +1,5 @@
+<Project>
+	<PropertyGroup>
+		<UseWinUI Condition="'$(UseWinUI)'==''">False</UseWinUI>
+	</PropertyGroup>
+</Project>

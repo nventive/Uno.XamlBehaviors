@@ -4,7 +4,12 @@
 using System;
 using System.Diagnostics;
 using System.Globalization;
+
+#if HAS_WINUI
+using Microsoft.UI.Xaml;
+#else
 using Windows.UI.Xaml;
+#endif
 
 namespace Microsoft.Xaml.Interactivity
 {

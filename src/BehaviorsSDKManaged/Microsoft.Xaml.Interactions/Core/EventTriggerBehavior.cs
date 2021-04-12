@@ -2,13 +2,24 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 namespace Microsoft.Xaml.Interactions.Core
 {
-    using System;
-    using System.Globalization;
-    using System.Reflection;
-    using System.Runtime.InteropServices.WindowsRuntime;
+    using global::System;
+    using global::System.Globalization;
+    using global::System.Reflection;
+    using global::System.Runtime.InteropServices.WindowsRuntime;
+    using Interactivity;
+
+#if HAS_WINUI
+    using Microsoft.UI.Xaml;
+    using Microsoft.UI.Xaml.Media;
+
+#if NET5_0_WINDOWS10_0_18362_0
+    using WinRT;
+#endif
+
+#else
     using Windows.UI.Xaml;
     using Windows.UI.Xaml.Media;
-    using Interactivity;
+#endif
 
     /// <summary>
     /// A behavior that listens for a specified event on its source and executes its actions when that event is fired.
@@ -18,7 +29,7 @@ namespace Microsoft.Xaml.Interactions.Core
         /// <summary>
         /// Identifies the <seealso cref="EventName"/> dependency property.
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
+        [global::System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
         public static readonly DependencyProperty EventNameProperty = DependencyProperty.Register(
             "EventName",
             typeof(string),
@@ -28,7 +39,7 @@ namespace Microsoft.Xaml.Interactions.Core
         /// <summary>
         /// Identifies the <seealso cref="SourceObject"/> dependency property.
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
+        [global::System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
         public static readonly DependencyProperty SourceObjectProperty = DependencyProperty.Register(
             "SourceObject",
             typeof(object),
@@ -151,7 +162,7 @@ namespace Microsoft.Xaml.Interactions.Core
                 MethodInfo methodInfo = typeof(EventTriggerBehavior).GetTypeInfo().GetDeclaredMethod("OnEvent");
                 this._eventHandler = methodInfo.CreateDelegate(info.EventHandlerType, this);
 
-#if !NETSTANDARD2_0
+#if NETFX_CORE
                 this._isWindowsRuntimeEvent = EventTriggerBehavior.IsWindowsRuntimeEvent(info);
                 if (this._isWindowsRuntimeEvent)
                 {
@@ -192,7 +203,7 @@ namespace Microsoft.Xaml.Interactions.Core
                 }
 
                 EventInfo info = this._resolvedSource.GetType().GetRuntimeEvent(eventName);
-#if !NETSTANDARD2_0
+#if NETFX_CORE
                 if (this._isWindowsRuntimeEvent)
                 {
                     WindowsRuntimeMarshal.RemoveEventHandler(this._removeEventHandlerMethod, this._eventHandler);

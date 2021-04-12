@@ -1,8 +1,14 @@
 ﻿// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using System;
+using global::System;
+using global::System.ComponentModel;
+
+#if HAS_WINUI
+using Microsoft.UI.Xaml;
+#else
 using Windows.UI.Xaml;
+#endif
 
 namespace Microsoft.Xaml.Interactivity
 {
@@ -15,7 +21,7 @@ namespace Microsoft.Xaml.Interactivity
 		/// <summary>
 		/// Gets the object to which this behavior is attached.
 		/// </summary>
-		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		[EditorBrowsable(EditorBrowsableState.Never)]
         public new T AssociatedObject
         {
             get { return (T)base.AssociatedObject; }

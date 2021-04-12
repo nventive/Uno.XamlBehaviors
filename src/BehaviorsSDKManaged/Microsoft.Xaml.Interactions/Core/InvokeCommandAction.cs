@@ -2,10 +2,16 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 namespace Microsoft.Xaml.Interactions.Core
 {
-    using System.Windows.Input;
+    using global::System.Windows.Input;
+    using Interactivity;
+
+#if HAS_WINUI
+    using Microsoft.UI.Xaml;
+    using Microsoft.UI.Xaml.Data;
+#else
     using Windows.UI.Xaml;
     using Windows.UI.Xaml.Data;
-    using Interactivity;
+#endif
 
     /// <summary>
     /// Executes a specified <see cref="System.Windows.Input.ICommand"/> when invoked. 
@@ -15,7 +21,7 @@ namespace Microsoft.Xaml.Interactions.Core
         /// <summary>
         /// Identifies the <seealso cref="Command"/> dependency property.
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
+        [global::System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
         public static readonly DependencyProperty CommandProperty = DependencyProperty.Register(
             "Command",
             typeof(ICommand),
@@ -25,7 +31,7 @@ namespace Microsoft.Xaml.Interactions.Core
         /// <summary>
         /// Identifies the <seealso cref="CommandParameter"/> dependency property.
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
+        [global::System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
         public static readonly DependencyProperty CommandParameterProperty = DependencyProperty.Register(
             "CommandParameter",
             typeof(object),
@@ -35,7 +41,7 @@ namespace Microsoft.Xaml.Interactions.Core
         /// <summary>
         /// Identifies the <seealso cref="InputConverter"/> dependency property.
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
+        [global::System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
         public static readonly DependencyProperty InputConverterProperty = DependencyProperty.Register(
             "InputConverter",
             typeof(IValueConverter),
@@ -45,7 +51,7 @@ namespace Microsoft.Xaml.Interactions.Core
         /// <summary>
         /// Identifies the <seealso cref="InputConverterParameter"/> dependency property.
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
+        [global::System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
         public static readonly DependencyProperty InputConverterParameterProperty = DependencyProperty.Register(
             "InputConverterParameter",
             typeof(object),
@@ -55,7 +61,7 @@ namespace Microsoft.Xaml.Interactions.Core
         /// <summary>
         /// Identifies the <seealso cref="InputConverterLanguage"/> dependency property.
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
+        [global::System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
         public static readonly DependencyProperty InputConverterLanguageProperty = DependencyProperty.Register(
             "InputConverterLanguage",
             typeof(string),

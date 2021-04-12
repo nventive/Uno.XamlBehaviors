@@ -2,12 +2,18 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 namespace Microsoft.Xaml.Interactions.Core
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Reflection;
+    using global::System;
+    using global::System.Collections.Generic;
+    using global::System.Reflection;
+    using Interactivity;
+
+#if HAS_WINUI
+    using Microsoft.UI.Xaml;
+    using Microsoft.UI.Xaml.Data;
+#else
     using Windows.UI.Xaml;
     using Windows.UI.Xaml.Data;
-    using Interactivity;
+#endif
 
     internal static class DataBindingHelper
     {

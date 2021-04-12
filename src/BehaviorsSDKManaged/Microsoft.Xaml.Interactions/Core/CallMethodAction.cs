@@ -2,23 +2,28 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 namespace Microsoft.Xaml.Interactions.Core
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Diagnostics;
-    using System.Globalization;
-    using System.Reflection;
-    using Windows.UI.Xaml;
+    using global::System;
+    using global::System.Collections.Generic;
+    using global::System.Diagnostics;
+    using global::System.Globalization;
+    using global::System.Reflection;
     using Microsoft.Xaml.Interactivity;
 
-	/// <summary>
-	/// An action that calls a method on a specified object when invoked.
-	/// </summary>
-	public sealed partial class CallMethodAction : DependencyObject, IAction
+#if HAS_WINUI
+    using Microsoft.UI.Xaml;
+#else
+    using Windows.UI.Xaml;
+#endif
+
+    /// <summary>
+    /// An action that calls a method on a specified object when invoked.
+    /// </summary>
+    public sealed partial class CallMethodAction : DependencyObject, IAction
     {
         /// <summary>
         /// Identifies the <seealso cref="MethodName"/> dependency property.
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
+        [global::System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
         public static readonly DependencyProperty MethodNameProperty = DependencyProperty.Register(
             "MethodName",
             typeof(string),
@@ -28,7 +33,7 @@ namespace Microsoft.Xaml.Interactions.Core
         /// <summary>
         /// Identifies the <seealso cref="TargetObject"/> dependency property.
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
+        [global::System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
         public static readonly DependencyProperty TargetObjectProperty = DependencyProperty.Register(
             "TargetObject",
             typeof(object),

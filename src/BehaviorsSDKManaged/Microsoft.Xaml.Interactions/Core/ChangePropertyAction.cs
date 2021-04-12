@@ -2,11 +2,16 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 namespace Microsoft.Xaml.Interactions.Core
 {
-    using System;
-    using System.Globalization;
-    using System.Reflection;
-    using Windows.UI.Xaml;
+    using global::System;
+    using global::System.Globalization;
+    using global::System.Reflection;
     using Interactivity;
+
+#if HAS_WINUI
+    using Microsoft.UI.Xaml;
+#else
+    using Windows.UI.Xaml;
+#endif
 
     /// <summary>
     /// An action that will change a specified property to a specified value when invoked.
@@ -16,7 +21,7 @@ namespace Microsoft.Xaml.Interactions.Core
         /// <summary>
         /// Identifies the <seealso cref="PropertyName"/> dependency property.
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
+        [global::System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
         public static readonly DependencyProperty PropertyNameProperty = DependencyProperty.Register(
             "PropertyName",
             typeof(PropertyPath),
@@ -26,7 +31,7 @@ namespace Microsoft.Xaml.Interactions.Core
         /// <summary>
         /// Identifies the <seealso cref="TargetObject"/> dependency property.
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
+        [global::System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
         public static readonly DependencyProperty TargetObjectProperty = DependencyProperty.Register(
             "TargetObject",
             typeof(object),
@@ -36,7 +41,7 @@ namespace Microsoft.Xaml.Interactions.Core
         /// <summary>
         /// Identifies the <seealso cref="Value"/> dependency property.
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
+        [global::System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
         public static readonly DependencyProperty ValueProperty = DependencyProperty.Register(
             "Value",
             typeof(object),
@@ -61,7 +66,7 @@ namespace Microsoft.Xaml.Interactions.Core
         /// <summary>
         /// Gets or sets the value to set. This is a dependency property.
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1721:PropertyNamesShouldNotMatchGetMethods")]
+        [global::System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1721:PropertyNamesShouldNotMatchGetMethods")]
         public object Value
         {
             get

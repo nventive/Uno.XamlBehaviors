@@ -2,11 +2,18 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 namespace Microsoft.Xaml.Interactivity
 {
-    using System;
-    using System.Collections.Generic;
+    using global::System;
+    using global::System.Collections.Generic;
+
+#if HAS_WINUI
+    using Microsoft.UI.Xaml;
+    using Microsoft.UI.Xaml.Controls;
+    using Microsoft.UI.Xaml.Media;
+#else
     using Windows.UI.Xaml;
     using Windows.UI.Xaml.Controls;
     using Windows.UI.Xaml.Media;
+#endif
 
     /// <summary>
     /// Provides various standard operations for working with <seealso cref="Windows.UI.Xaml.VisualStateManager"/>.
@@ -74,7 +81,7 @@ namespace Microsoft.Xaml.Interactivity
         /// <param name="element">The <see cref="Windows.UI.Xaml.FrameworkElement"/> from which to find the nearest stateful control.</param>
         /// <returns>The nearest <see cref="Windows.UI.Xaml.Controls.Control"/> that contains visual states; else null.</returns>
         /// <exception cref="System.ArgumentNullException"><paramref name="element"/> is null.</exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Stateful")]
+        [global::System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Stateful")]
         public static Control FindNearestStatefulControl(FrameworkElement element)
         {
             if (element == null)

@@ -2,13 +2,22 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 namespace Microsoft.Xaml.Interactions.Core
 {
-    using System;
-    using System.Collections.Generic;
+    using global::System;
+    using global::System.Collections.Generic;
+    using Interactivity;
+
+#if HAS_WINUI
+    using Microsoft.UI.Xaml;
+    using Microsoft.UI.Xaml.Controls;
+    using Microsoft.UI.Xaml.Controls.Primitives;
+    using Microsoft.UI.Xaml.Media;
+#else
     using Windows.UI.Xaml;
     using Windows.UI.Xaml.Controls;
     using Windows.UI.Xaml.Controls.Primitives;
     using Windows.UI.Xaml.Media;
-    using Interactivity;
+#endif
+
 
     /// <summary>
     /// A behavior that allows incremental updating of <seealso cref="Windows.UI.Xaml.Controls.ListView"/> and <seealso cref="Windows.UI.Xaml.Controls.GridView"/> contents to support faster updating.
@@ -19,7 +28,7 @@ namespace Microsoft.Xaml.Interactions.Core
         /// <summary>
         /// Identifies the <seealso cref="Phase"/> dependency property.
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
+        [global::System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
         public static readonly DependencyProperty PhaseProperty = DependencyProperty.Register(
             "Phase",
             typeof(int),

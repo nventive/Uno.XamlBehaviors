@@ -2,14 +2,19 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 namespace Microsoft.Xaml.Interactivity
 {
-    using System;
-    using System.Collections.Generic;
-    using Windows.UI.Xaml;
+    using global::System;
+    using global::System.Collections.Generic;
 
-	/// <summary>
-	/// Defines a <see cref="BehaviorCollection"/> attached property and provides a method for executing an <seealso cref="ActionCollection"/>.
-	/// </summary>
-	public sealed class Interaction
+#if HAS_WINUI
+    using Microsoft.UI.Xaml;
+#else
+    using Windows.UI.Xaml;
+#endif
+
+    /// <summary>
+    /// Defines a <see cref="BehaviorCollection"/> attached property and provides a method for executing an <seealso cref="ActionCollection"/>.
+    /// </summary>
+    public sealed class Interaction
     {
         /// <remarks>
         /// CA1053: Static holder types should not have public constructors
@@ -21,7 +26,7 @@ namespace Microsoft.Xaml.Interactivity
         /// <summary>
         /// Gets or sets the <see cref="BehaviorCollection"/> associated with a specified object.
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
+        [global::System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
         public static readonly DependencyProperty BehaviorsProperty = DependencyProperty.RegisterAttached(
             "Behaviors",
             typeof(BehaviorCollection),
