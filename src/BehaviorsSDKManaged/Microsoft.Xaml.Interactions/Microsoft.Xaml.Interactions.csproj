@@ -20,12 +20,12 @@
 		<When Condition="'$(UseWinUI)'=='True'">
 			<PropertyGroup>
 				<DefineConstants>WinUI</DefineConstants>
-				<PackageId>Uno.Microsoft.Xaml.Behaviors.Uwp.Managed.WinUI</PackageId>
+				<PackageId>Uno.Microsoft.Xaml.Behaviors.WinUI.Managed</PackageId>
 				<TargetFrameworks>$(TargetFrameworks);net5.0-windows10.0.18362.0</TargetFrameworks>
 			</PropertyGroup>
 			<ItemGroup>
 				<PackageReference Condition="'$(TargetFramework)'!='net5.0-windows10.0.18362.0'" Include="Uno.WinUI" Version="3.2.0" />
-				<PackageReference Include="Microsoft.ProjectReunion.WinUI" Version="0.5.0" />
+				<PackageReference Condition="'$(TargetFramework)'=='net5.0-windows10.0.18362.0'" Include="Microsoft.ProjectReunion.WinUI" Version="0.5.0" />
 			</ItemGroup>
 		</When>
 		<Otherwise>
