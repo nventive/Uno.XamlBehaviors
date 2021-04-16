@@ -161,7 +161,7 @@ namespace Microsoft.Xaml.Interactions.Core
                 MethodInfo methodInfo = typeof(EventTriggerBehavior).GetTypeInfo().GetDeclaredMethod("OnEvent");
                 this._eventHandler = methodInfo.CreateDelegate(info.EventHandlerType, this);
 
-#if WinUI || !NETSTANDARD2_0
+#if WinUI || HAS_UNO
                 info.AddEventHandler(this._resolvedSource, this._eventHandler);
 #else
                 this._isWindowsRuntimeEvent = EventTriggerBehavior.IsWindowsRuntimeEvent(info);
@@ -204,7 +204,7 @@ namespace Microsoft.Xaml.Interactions.Core
                 }
 
                 EventInfo info = this._resolvedSource.GetType().GetRuntimeEvent(eventName);
-#if WinUI || !NETSTANDARD2_0
+#if WinUI || HAS_UNO
                 info.RemoveEventHandler(this._resolvedSource, this._eventHandler);
 #else
                 if (this._isWindowsRuntimeEvent)
