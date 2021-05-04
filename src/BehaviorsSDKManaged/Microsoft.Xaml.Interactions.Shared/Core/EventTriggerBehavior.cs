@@ -46,7 +46,8 @@ namespace Microsoft.Xaml.Interactions.Core
         private object _resolvedSource;
         private Delegate _eventHandler;
         private bool _isLoadedEventRegistered;
-#if !WinUI
+
+#if !(WinUI || HAS_UNO)
         private bool _isWindowsRuntimeEvent;
         private Func<Delegate, EventRegistrationToken> _addEventHandlerMethod;
         private Action<EventRegistrationToken> _removeEventHandlerMethod;
